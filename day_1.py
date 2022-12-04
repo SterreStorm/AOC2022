@@ -17,7 +17,7 @@ def find_most_cals(textfile):
             try:
                 calories += int(line)
                 elf_dict[elfcount] = calories
-            except:
+            except ValueError:
                 if line == "":
                     calories = 0
                     elfcount += 1

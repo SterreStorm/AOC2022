@@ -13,7 +13,7 @@ def rock_paper_scissors(filename):
                 else:
                     total_score += 2
 
-            # draw
+            # draw een biertje
             elif self == "Y":
                 total_score += 3
                 if opponent == "A":
