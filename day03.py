@@ -71,7 +71,7 @@ def rugzak_value_group(filename):
             rugzakvalue += tempvalue
     print(rugzakvalue)
 
-rugzak_value_group("day3full.txt")
+rugzak_value_group("Input/day3full.txt")
 
 
 

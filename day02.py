@@ -37,4 +37,4 @@ def rock_paper_scissors(filename):
         print(f"Your total score is {total_score}")
 
 
-rock_paper_scissors("day2full.txt")
+rock_paper_scissors("Input/day2full.txt")
