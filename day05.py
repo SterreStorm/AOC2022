@@ -45,13 +45,18 @@ def doe_dan(filename):
 
     # big moving things
     for elem in directions:
+        count = elem[0] # only for pt 2
         for i in range(0, elem[0]):
-            stacks[elem[2] - 1].append(stacks[elem[1] - 1][-1])
-            stacks[elem[1] - 1].pop()
+            # pt 1 1
+            # stacks[elem[2] - 1].append(stacks[elem[1] - 1][- 1])
+            # stacks[elem[1] - 1].pop()
+            stacks[elem[2] - 1].append(stacks[elem[1] - 1][- count])
+            stacks[elem[1] - 1].pop(- count)
+            count -= 1
     print(stacks)
-    answer = []
 
     # antwoordje zoeken denk
+    answer = []
     for elem in stacks:
         answer.append(elem[-1])
     print(answer)
