@@ -2,7 +2,6 @@ import re
 import pandas as pd
 import numpy as np
 
-
 def create_matrices(filename):
     sequencematrix = []
     stacks = []
@@ -53,7 +52,6 @@ def doe_dan(filename):
             stacks[elem[2] - 1].append(stacks[elem[1] - 1][- count])
             stacks[elem[1] - 1].pop(- count)
             count -= 1
-    print(stacks)
 
     # antwoordje zoeken denk
     answer = []
