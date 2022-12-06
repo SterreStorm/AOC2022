@@ -8,8 +8,8 @@ def start_of_packet(filename):
                 count = 0
                 substring = line[i-13:i+1]
                 # check if no double characters
-                for j in range(len(substring)):
-                    if substring.count(substring[j]) > 1:
+                for char in substring:
+                    if substring.count(char) > 1:
                         count += 1
                 # print location
                 if count == 0:
