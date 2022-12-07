@@ -1,4 +1,4 @@
-
+# klasjes
 class Dir:
     def __init__(self, name, parent):
         self.name = name
@@ -40,6 +40,7 @@ class File:
         return self.size
 
 
+# Dus wij input parse
 def parse_input(filename):
     # boom bouwen
     with open(filename) as f:
@@ -59,20 +60,21 @@ def parse_input(filename):
 
                         else:
                             currentdirectory = currentdirectory.directories[line]
-
+            # dirtjens makon
             elif line.startswith("dir"):
                 line = line.strip().replace("dir ", "")
                 currentdirectory.add_directory(line, currentdirectory)
-
+            # filetjens bouwen
             else:
                 line = line.strip()
                 size, name = line.split()
                 currentdirectory.add_file(name, size)
-
+        # wortel terugggeven
         return root
 
 
-def lekker_rekene(boom, minimal_needed, best_amt = None):
+# dit is dus niet lekker rekenen, maar wel recursion
+def lekker_rekene(boom, minimal_needed, best_amt=None):
     size = boom.calculate_size()
     best = best_amt
 
@@ -85,6 +87,8 @@ def lekker_rekene(boom, minimal_needed, best_amt = None):
 
     return best
 
+
+# daadwerkelijk een antwoord uitrekene
 def anders_rekene(boom):
     total_space = 70000000
     filesize = 30000000
@@ -95,7 +99,6 @@ def anders_rekene(boom):
 
     print(best_amount)
 
+
 boom = parse_input("input/day7full.txt")
 anders_rekene(boom)
-
-
