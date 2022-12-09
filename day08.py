@@ -69,10 +69,60 @@ def boompjens_telle(filename):
 
     return tot_coord
 
+# day 2
+def best_score(filename):
+    grid = grid_make(filename)
+    verical_grid = rotate_grid(grid)
+    total_values = {}
 
-def scenic_calc(filename):
-    list_of_coords = boompjens_telle(filename)
+    hor_1 = scenic_calc(grid, 1)
+    hor_2 = scenic_calc(grid, -1)
+    ver_1 = scenic_calc(verical_grid, 1, True)
+    ver_2 = scenic_calc(verical_grid, -1, True)
+    print(ver_2)
+
+    for coordinate in hor_1:
+        total_values[coordinate] = hor_1[coordinate] * hor_2[coordinate] * ver_1[coordinate] * ver_2[coordinate]
+
+    highest_scenic = max(total_values.values())
+    print(highest_scenic)
+
+def scenic_calc(grid, direction, vert: bool = False):
+    scenicscore = {}
+
+    for row in grid:
+        y = grid.index(row)
+        if direction == -1:
+            row = list(reversed(row))
+        # run through row by row
+        for i in range(len(row)):
+            value = row[i]
+            direction_score = 0
+            blocked = False
+
+            # last tree value
+            if i == len(row) - 1:
+                blocked = True
+
+            #check how many visible
+            for element in row[i + 1: len(row)]:
+                if not blocked:
+                    if value > element:
+                        direction_score += 1
+                    elif value <= element:
+                        direction_score += 1
+                        blocked = True
+
+            x = i
+            if direction == -1:
+                x = len(row) - 1 - i
+
+            if not vert:
+                scenicscore[(x, y)] = direction_score
+            else:
+                scenicscore[(y, x)] = direction_score
+    return scenicscore
 
 
-boompjens_telle("input/day8full.txt")
 
+best_score("input/day8full.txt")
