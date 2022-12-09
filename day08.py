@@ -79,7 +79,6 @@ def best_score(filename):
     hor_2 = scenic_calc(grid, -1)
     ver_1 = scenic_calc(verical_grid, 1, True)
     ver_2 = scenic_calc(verical_grid, -1, True)
-    print(ver_2)
 
     for coordinate in hor_1:
         total_values[coordinate] = hor_1[coordinate] * hor_2[coordinate] * ver_1[coordinate] * ver_2[coordinate]
@@ -99,10 +98,6 @@ def scenic_calc(grid, direction, vert: bool = False):
             value = row[i]
             direction_score = 0
             blocked = False
-
-            # last tree value
-            if i == len(row) - 1:
-                blocked = True
 
             #check how many visible
             for element in row[i + 1: len(row)]:
