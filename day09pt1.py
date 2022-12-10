@@ -7,32 +7,17 @@ def parse_input(filename):
         return direction_array
 
 
-def construct_lib(no_knots):
-    knot_locations = []
-    for i in range(no_knots):
-        if i == 0:
-            knot_locations.append(["H", (0, 0)])
-        else:
-            knot_locations.append([i, (0, 0)])
-    return knot_locations
-
-
-def count_locations(filename, no_knots):
+def count_locations(filename):
     directions = parse_input(filename)
     tail_positions = set()
-    knots = construct_lib(no_knots)
 
-    pos_h = knots[0][1]
-    pos_t = knots[1][1]
+    pos_h = (0, 0)
+    pos_t = (0, 0)
 
     # loop through directions to move the head
     for direction_set in directions:
         direction, steps = direction_set
-
         pos_h, pos_t, positions = move_rope(pos_h, pos_t, direction, steps)
-        knots[0][1] = pos_h
-        knots[1][1] = pos_t
-
         # add all new tail positions to positions set
         for position in positions:
             tail_positions.add(position)
@@ -41,14 +26,27 @@ def count_locations(filename, no_knots):
     print(len(tail_positions))
 
 
-def move_rope(pos_h, pos_t, direction, steps):
+def move_rope(pos_h, pos_t , direction, steps):
     x, y = pos_h
     a, b = pos_t
     positions = []
-
+    up_or_down = True # check if going + or -
+    print(f"{direction}{steps} \n--")
     for i in range(steps):
         # adjust position head
-        x, y = move_head((x, y), direction)
+        if direction == "R" or direction == "U":
+            up_or_down = True
+            if direction == "R":
+                x += 1
+            else:
+                y += 1
+
+        elif direction == "L" or direction == "D":
+            up_or_down = False
+            if direction == "L":
+                x -= 1
+            else:
+                y -= 1
 
         # calculate space between head and tail
         d_w = abs(x - a)
@@ -102,20 +100,4 @@ def move_rope(pos_h, pos_t, direction, steps):
     return (x, y), (a, b), positions
 
 
-def move_head(head_coordinates, direction):
-    x, y = head_coordinates
-    if direction == "R" or direction == "U":
-        if direction == "R":
-            x += 1
-        else:
-            y += 1
-
-    elif direction == "L" or direction == "D":
-        if direction == "L":
-            x -= 1
-        else:
-            y -= 1
-    return x, y
-
-
-count_locations("input/day9full.txt", 2)
+count_locations("input/day9full.txt")
