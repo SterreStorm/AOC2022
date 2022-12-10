@@ -30,7 +30,6 @@ def move_rope(pos_h, pos_t , direction, steps):
     x, y = pos_h
     a, b = pos_t
     positions = []
-    up_or_down = True # check if going + or -
     print(f"{direction}{steps} \n--")
     for i in range(steps):
         # adjust position head
@@ -92,6 +91,7 @@ def move_rope(pos_h, pos_t , direction, steps):
             else:
                 a -= 1
 
+
         positions.append((a, b))
         print(f"H: ({x}, {y})")
         print(f"T: ({a}, {b})")
@@ -100,4 +100,4 @@ def move_rope(pos_h, pos_t , direction, steps):
     return (x, y), (a, b), positions
 
 
-count_locations("input/day9full.txt")
+count_locations("input/day9test.txt")
