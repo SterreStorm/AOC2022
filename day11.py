@@ -1,11 +1,12 @@
 import re
 import math
 
+
 def parse_input(filename):
     # regex matches for filtering
     monkey_match = r"Monkey (.*):"  # find monkey number
     starting_items_match = r"Starting items: (.*)"
-    operation_match = r"Operation: new = (.*)" # find monkey operation
+    operation_match = r"Operation: new = (.*)"  # find monkey operation
     test_match = r"Test: divisible by (.*)"
     true_match = r"If true: throw to monkey (.*)"
     false_match = r"If false: throw to monkey (.*)"
@@ -18,7 +19,7 @@ def parse_input(filename):
     for monkey in split_monkeys:
         monkey.strip()
         monkey_no = int(re.search(monkey_match, monkey).group(1))
-        starting_items = re.findall(starting_items_match, monkey) # re.findall('\d+',monkey_split[1])
+        starting_items = re.findall(starting_items_match, monkey)  # re.findall('\d+',monkey_split[1])
         starting_items = [int(x) for x in starting_items[0].split(',')]
         operation = re.search(operation_match, monkey).group(1)
         divisible_by = int(re.search(test_match, monkey).group(1))
@@ -29,6 +30,7 @@ def parse_input(filename):
         monkey_list.append([operation, divisible_by, if_true, if_false, inspection_count, starting_items])
 
     return monkey_list
+
 
 def solve_operation(operation, item_value):
     part_1, operator, part_2 = operation.split()
@@ -43,14 +45,19 @@ def solve_operation(operation, item_value):
         new_value = part_1 + part_2
     return new_value
 
+def find_mod(monkeylist):
+    modulo = 1
+    for monkey in monkeylist:
+        modulo *= monkey[1]
 
-
-
+    return modulo
 
 
 def monkey_time(filename, rounds):
     monkey_list = parse_input(filename)
     counts = []
+    modulo = find_mod(monkey_list)
+
     # rounds
     for round in range(rounds):
         for j, monkey in enumerate(monkey_list):
@@ -63,8 +70,8 @@ def monkey_time(filename, rounds):
 
             for item in items:
                 count += 1
-                item = math.floor(solve_operation(operation, item))
-
+                item = (solve_operation(operation, item))
+                item %= modulo
                 if item % divisible_by == 0:
                     item = item
                     monkey_list[if_true][5].append(item)
@@ -75,26 +82,11 @@ def monkey_time(filename, rounds):
 
     for monkey in monkey_list:
         counts.append(monkey[4])
-    counts.sort(reverse= True)
+    counts.sort(reverse=True)
 
     total = counts[0] * counts[1]
     print(counts)
     print(total)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-monkey_time("input/day11test.txt", 20)
-
+monkey_time("input/day11full.txt", 10000)
