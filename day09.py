@@ -93,8 +93,6 @@ def move_rope(pos_h, pos_t):
                 b += 1
             elif y < b:
                 b -= 1
-
-
     positions.append((a, b))
 
     return (a, b), positions
