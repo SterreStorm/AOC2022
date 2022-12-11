@@ -58,11 +58,12 @@ def draw_sprite(filename):
     for cycle in cycle_values:
         count = cycle[0] - (times_40 * 40)
         x = cycle[1]
-        sprite_position = [x, x + 2]
+
         if x + 2 >= count >= x:
             crt_line = crt_line + "#"
 
-        else: crt_line = crt_line + "."
+        else:
+            crt_line = crt_line + "."
 
         if len(crt_line) == 40:
             print(crt_line)
