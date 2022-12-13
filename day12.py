@@ -92,7 +92,7 @@ def traverse_map(filename):
             all_steps.append(steps)
 
     all_steps.sort()
-    print(all_steps)
+    print(all_steps[0])
 
 
 
