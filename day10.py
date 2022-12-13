@@ -63,13 +63,12 @@ def draw_sprite(filename):
             crt_line = crt_line + "#"
 
         else:
-            crt_line = crt_line + "."
+            crt_line = crt_line + " "
 
         if len(crt_line) == 40:
             print(crt_line)
             crt_line = ""
             times_40 += 1
-
 
 
 

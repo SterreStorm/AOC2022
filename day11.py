@@ -1,7 +1,4 @@
 import re
-import math
-
-
 def parse_input(filename):
     # regex matches for filtering
     monkey_match = r"Monkey (.*):"  # find monkey number
@@ -15,7 +12,7 @@ def parse_input(filename):
 
     with open(filename) as f:
         split_monkeys = f.read().split('\n\n')
-    # set monkey in dictionairy with things
+    # set monkey in dictionary with things
     for monkey in split_monkeys:
         monkey.strip()
         monkey_no = int(re.search(monkey_match, monkey).group(1))
@@ -44,6 +41,7 @@ def solve_operation(operation, item_value):
     elif operator == "+":
         new_value = part_1 + part_2
     return new_value
+
 
 def find_mod(monkeylist):
     modulo = 1
